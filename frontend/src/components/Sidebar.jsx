@@ -22,7 +22,7 @@ const nav = [
   { to: "/bookings", icon: CalendarClock, label: "Bookings", roles: ["super_admin", "operator"] },
   { to: "/transfers", icon: Plane, label: "Airport Transfers", roles: ["super_admin", "operator"] },
   { to: "/owners", icon: Users, label: "Car Owners", roles: ["super_admin", "operator"] },
-  { to: "/agents", icon: UserCog, label: "Agents", roles: ["super_admin"] },
+  { to: "/agents", icon: UserCog, label: "Car Drivers", roles: ["super_admin"] },
   { to: "/cars", icon: Car, label: "Cars", roles: ["super_admin"] },
   { to: "/ledger", icon: Wallet, label: "Ledger", roles: ["super_admin"] },
   { to: "/finance", icon: LineChart, label: "Finance & Savings", roles: ["super_admin"] },

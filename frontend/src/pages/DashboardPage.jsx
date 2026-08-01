@@ -128,7 +128,7 @@ export default function DashboardPage() {
         <KpiCard
           label="Net Profit"
           value={formatInr(s.total_net_profit)}
-          sub="After agent fees"
+          sub="After driver fees"
           tone="positive"
           testid="kpi-net-profit"
         />
@@ -142,7 +142,7 @@ export default function DashboardPage() {
         <KpiCard
           label={`Savings @ ${s.savings_percent || 10}%`}
           value={formatInr(s.savings_accrued)}
-          sub={`Agent fees pending: ${formatInr(s.agent_pending)}`}
+          sub={`Driver fees pending: ${formatInr(s.agent_pending)}`}
           tone="warn"
           testid="kpi-savings"
         />

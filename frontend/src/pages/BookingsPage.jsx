@@ -216,18 +216,18 @@ export default function BookingsPage() {
                   </Field>
                   {!isOp && (
                     <>
-                      <Field label="Assigned agent (optional)">
+                      <Field label="Assigned car driver (optional)">
                         <Select value={form.assigned_agent_id || "none"} onValueChange={(v) => setForm({ ...form, assigned_agent_id: v === "none" ? "" : v })}>
-                          <SelectTrigger><SelectValue placeholder="No agent (in-house)" /></SelectTrigger>
+                          <SelectTrigger><SelectValue placeholder="No car driver (in-house)" /></SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="none">In-house (no agent)</SelectItem>
+                            <SelectItem value="none">In-house (no car driver)</SelectItem>
                             {agents.map((a) => (
                               <SelectItem key={a.id} value={a.id}>{a.name}</SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
                       </Field>
-                      <Field label="Agent fee (₹)">
+                      <Field label="Driver fee (₹)">
                         <Input type="number" value={form.agent_fee} onChange={(e) => setForm({ ...form, agent_fee: e.target.value })} />
                       </Field>
                     </>

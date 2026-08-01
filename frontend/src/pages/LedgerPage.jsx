@@ -97,7 +97,7 @@ export default function LedgerPage() {
               Car Owner Payables
             </TabsTrigger>
             <TabsTrigger value="agent" data-testid="ledger-tab-agent" className="data-[state=active]:bg-white">
-              Agent Commissions
+              Car Driver Fees
             </TabsTrigger>
           </TabsList>
           <Select value={status} onValueChange={setStatus}>

@@ -75,7 +75,7 @@ export default function EntityLedgerPage({ type }) {
   const balance = Number(entity.total_owed) - Number(entity.total_paid);
 
   return (
-    <AppLayout title={entity.name} subtitle={isOwner ? "Car owner ledger" : "Agent ledger"}>
+    <AppLayout title={entity.name} subtitle={isOwner ? "Car owner ledger" : "Car driver ledger"}>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <div className="bg-white border border-[#C3E7F1] rounded-xl p-6 lg:col-span-1 shadow-xs">
           <div className="w-14 h-14 rounded-full bg-[#C3E7F1]/30 border border-[#C3E7F1] flex items-center justify-center">

@@ -32,7 +32,7 @@ export default function FinancePage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 stagger">
         <KpiCard label="Total income" value={formatInr(s.total_income)} sub={`${s.booking_count} bookings`} testid="finance-income" />
         <KpiCard label="Total payouts" value={formatInr(s.total_owner_cost + s.total_agent_fee)}
-          sub={`Owner ${formatInr(s.total_owner_cost)} · Agent ${formatInr(s.total_agent_fee)}`}
+          sub={`Owner ${formatInr(s.total_owner_cost)} · Driver ${formatInr(s.total_agent_fee)}`}
           tone="negative" testid="finance-payouts" />
         <KpiCard label="Net profit" value={formatInr(s.total_net_profit)}
           sub={`Gross margin ${formatInr(s.total_margin)}`}
@@ -55,7 +55,7 @@ export default function FinancePage() {
                 <Legend wrapperStyle={{ fontSize: 11 }} />
                 <Bar dataKey="income" name="Income" fill="#0F172A" radius={[3, 3, 0, 0]} />
                 <Bar dataKey="owner_cost" name="Owner cost" fill="#DC2626" radius={[3, 3, 0, 0]} />
-                <Bar dataKey="agent_fee" name="Agent fee" fill="#F59E0B" radius={[3, 3, 0, 0]} />
+                <Bar dataKey="agent_fee" name="Driver fee" fill="#F59E0B" radius={[3, 3, 0, 0]} />
                 <Line type="monotone" dataKey="net_profit" name="Net profit" stroke="#EA580C" strokeWidth={2.5} dot={{ r: 3 }} />
               </ComposedChart>
             </ResponsiveContainer>
@@ -87,7 +87,7 @@ export default function FinancePage() {
               <th className="text-right px-5 py-2.5 font-semibold">Bookings</th>
               <th className="text-right px-5 py-2.5 font-semibold">Income</th>
               <th className="text-right px-5 py-2.5 font-semibold">Owner cost</th>
-              <th className="text-right px-5 py-2.5 font-semibold">Agent fee</th>
+              <th className="text-right px-5 py-2.5 font-semibold">Driver fee</th>
               <th className="text-right px-5 py-2.5 font-semibold">Net profit</th>
               <th className="text-right px-5 py-2.5 font-semibold">Savings</th>
             </tr>

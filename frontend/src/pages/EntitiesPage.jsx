@@ -19,8 +19,8 @@ import { Link } from "react-router-dom";
  */
 export default function EntitiesPage({ type }) {
   const isOwner = type === "owner";
-  const label = isOwner ? "Car Owners" : "Agents";
-  const single = isOwner ? "owner" : "agent";
+  const label = isOwner ? "Car Owners" : "Car Drivers";
+  const single = isOwner ? "owner" : "driver";
   const endpoint = isOwner ? "/owners" : "/agents";
   const { user } = useAuth();
   const canWrite = user?.role === "super_admin";
@@ -57,12 +57,12 @@ export default function EntitiesPage({ type }) {
   return (
     <AppLayout
       title={label}
-      subtitle={isOwner ? "Vehicle suppliers & fleet owners pool management" : "Brokers & referral partner commission management"}
+      subtitle={isOwner ? "Vehicle suppliers & fleet owners pool management" : "Car drivers & referral partner commission management"}
       actions={canWrite && (
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button className="bg-[#20373B] hover:bg-[#2C494E] text-[#FFC64F] font-bold shadow-md" data-testid={`new-${single}-button`}>
-              <Plus className="w-4 h-4 mr-1.5" /> Add New {isOwner ? "Car Owner" : "Agent"}
+              <Plus className="w-4 h-4 mr-1.5" /> Add New {isOwner ? "Car Owner" : "Car Driver"}
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-md">
@@ -71,7 +71,7 @@ export default function EntitiesPage({ type }) {
                 <div className="w-8 h-8 rounded-full bg-[#C3E7F1] flex items-center justify-center text-[#20373B]">
                   {isOwner ? <Car className="w-4 h-4" /> : <Users className="w-4 h-4" />}
                 </div>
-                Add New {isOwner ? "Car Owner" : "Agent"}
+                Add New {isOwner ? "Car Owner" : "Car Driver"}
               </DialogTitle>
             </DialogHeader>
             <div className="space-y-4 py-2">
@@ -79,7 +79,7 @@ export default function EntitiesPage({ type }) {
                 {isOwner ? (
                   <span>💡 <strong>Car Owner:</strong> Person or company supplying cars for your rental fleet. You can assign cars to them under the <strong>Cars</strong> section.</span>
                 ) : (
-                  <span>💡 <strong>Agent:</strong> Broker or partner referring customer bookings. You can assign agents to bookings to track commission fees.</span>
+                  <span>💡 <strong>Car Driver:</strong> Driver or partner referring customer bookings. You can assign car drivers to bookings to track commission fees.</span>
                 )}
               </div>
               <div className="space-y-1.5">
@@ -87,7 +87,7 @@ export default function EntitiesPage({ type }) {
                 <Input
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder={isOwner ? "e.g. Ramesh Desai (Goa Fleet)" : "e.g. Rahul Sharma (Hotel Concierge)"}
+                  placeholder={isOwner ? "e.g. Ramesh Desai (Goa Fleet)" : "e.g. Suresh Kumar (Car Driver)"}
                   data-testid={`${single}-name-input`}
                 />
               </div>
@@ -105,7 +105,7 @@ export default function EntitiesPage({ type }) {
                 <Textarea
                   value={form.notes}
                   onChange={(e) => setForm({ ...form, notes: e.target.value })}
-                  placeholder={isOwner ? "Bank details, location, preferred payout method..." : "Commission terms, hotel location, contact details..."}
+                  placeholder={isOwner ? "Bank details, location, preferred payout method..." : "Driver terms, location, contact details..."}
                   rows={2}
                 />
               </div>
@@ -113,7 +113,7 @@ export default function EntitiesPage({ type }) {
             <DialogFooter>
               <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
               <Button onClick={save} disabled={saving} className="bg-[#20373B] hover:bg-[#2C494E] text-[#FFC64F] font-bold" data-testid={`${single}-save-button`}>
-                {saving ? "Saving…" : `Save ${isOwner ? "Owner" : "Agent"}`}
+                {saving ? "Saving…" : `Save ${isOwner ? "Owner" : "Car Driver"}`}
               </Button>
             </DialogFooter>
           </DialogContent>
@@ -128,9 +128,9 @@ export default function EntitiesPage({ type }) {
           </div>
           <div>
             <h3 className="font-display font-bold text-white flex items-center gap-2">
-              {isOwner ? "What are Car Owners?" : "What are Agents?"}
+              {isOwner ? "What are Car Owners?" : "What are Car Drivers?"}
               <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#519CAB]/30 text-[#FFC64F] font-medium border border-[#519CAB]/40">
-                {isOwner ? "Vehicle Suppliers" : "Referral Brokers"}
+                {isOwner ? "Vehicle Suppliers" : "Drivers & Referral Partners"}
               </span>
             </h3>
             <p className="text-xs text-[#C3E7F1] mt-1 max-w-3xl leading-relaxed">
@@ -140,7 +140,7 @@ export default function EntitiesPage({ type }) {
                 </>
               ) : (
                 <>
-                  <strong>Agents</strong> are brokers, hotels, or booking partners who refer customers. When creating a <strong>Booking</strong>, select an agent to assign their <em>Agent Fee</em> commission. The system auto-calculates net profits and maintains an agent commission ledger.
+                  <strong>Car Drivers</strong> are drivers or booking partners who handle trips or refer customers. When creating a <strong>Booking</strong>, select a car driver to assign their <em>Driver Fee</em> commission. The system auto-calculates net profits and maintains a driver commission ledger.
                 </>
               )}
             </p>
@@ -240,11 +240,11 @@ export default function EntitiesPage({ type }) {
             <p className="text-sm text-slate-500 max-w-md mx-auto mb-6">
               {isOwner
                 ? "Start by adding car owners who supply vehicles for your fleet. Once registered, you can assign cars to them."
-                : "Add agents, brokers, or hotel partners to track referral commissions and profit margins per booking."}
+                : "Add car drivers, brokers, or hotel partners to track referral commissions and profit margins per booking."}
             </p>
             {canWrite && (
               <Button onClick={() => setOpen(true)} className="bg-[#20373B] hover:bg-[#2C494E] text-[#FFC64F] font-bold">
-                <Plus className="w-4 h-4 mr-1.5" /> Click to Add First {isOwner ? "Car Owner" : "Agent"}
+                <Plus className="w-4 h-4 mr-1.5" /> Click to Add First {isOwner ? "Car Owner" : "Car Driver"}
               </Button>
             )}
           </div>

@@ -1,0 +1,37 @@
+{
+  "summary": "Backend-only testing for Car Castle Goa completed. 40/40 pytest cases PASSED covering auth (login/logout/me/invalid), role gating (operator 403 on 8 restricted routes), owners/agents/cars CRUD, duplicate car-registration rejection, rate-history logging, booking margin/net_profit computation, owner+agent ledger side effects, operator sanitization (hidden cost_rate/margin/net_profit/agent_fee on GET/POST/PUT list), operator status-only update enforcement, super_admin booking delete + ledger reversal, transfers list & status update (valid + invalid), ledger partial->paid flow, overpayment 400, MOCK reminder increment, finance summary + margin-timeseries (day/week/month), monthly PDF + XLSX exports, settings scoped by role, and activity log growth. Success rate 100%.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "PUT /api/bookings for super_admin ALWAYS recomputes margin/net_profit even when only non-financial fields change. Currently harmless (uses old values → same result), but future changes to stored margin should be aware.",
+    "reports_router._gather_report uses unescaped regex from `month` query param ({'$regex': f'^{month}'}). Consider validating month matches ^\\d{4}-\\d{2}$ or use $gte/$lt on start_date to prevent regex injection or errant behavior.",
+    "auth cookies are set with secure=False; acceptable for internal preview but should be secure=True + SameSite=None (or lax with same-site frontend) in production.",
+    "CORS: when CORS_ORIGINS='*' the code disables allow_credentials, which means cookie-based cross-site auth would fail from an external browser. Bearer token in body is the working path (already verified).",
+    "PUT /api/bookings will return 403 for operator only if the operator sends fields OTHER than {status, transfer_status, notes}. If they send an allowed field the update proceeds; forbidden fields are silently filtered (documented expected behavior per PRD — OK)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py"
+  ],
+  "success_rate": {
+    "backend": "100%",
+    "frontend": "not tested (backend-only request)"
+  },
+  "test_credentials": "super_admin: admin@carcastlegoa.com / admin123 ; operator: operator1@carcastlegoa.com / operator123 (verified working)",
+  "seed_data_creation": "Tests create and clean up their own TEST_-prefixed data (owners, cars, agents, bookings). Existing demo data (18 bookings, 3 owners, 2 agents, 5 cars, 3 admins) untouched. Settings.savings_percent restored to 10.0 after test.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "backend_test.py is a full regression suite (40 tests, ~9s w/ 2 workers). Uses REACT_APP_BACKEND_URL from /app/frontend/.env. All test data is prefixed TEST_ and self-cleans. Do NOT run /app/backend/seed_demo.py — it wipes demo data. Auth via Bearer token in Authorization header works reliably; cookies also set but not required. Ledger auto-creates 1 entry for owner and (optionally) 1 for agent when agent_fee>0. Deleting a booking reverses the owner/agent total_owed & total_paid.",
+  "rca of the issue": "N/A — no bugs found."
+}

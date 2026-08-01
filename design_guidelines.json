@@ -1,0 +1,119 @@
+{
+  "theme_strategy": "Light mode default for optimal data readability, with functional high-contrast palette.",
+  "typography": {
+    "primary_font": "Manrope",
+    "secondary_font": "IBM Plex Sans",
+    "instructions": "Use Manrope for all headings (H1-H4) with tracking-tight. Use IBM Plex Sans for body text, ledgers, and tabular data as it provides excellent legibility for numbers.",
+    "hierarchy": {
+      "h1": "text-3xl sm:text-4xl font-bold tracking-tight text-slate-900",
+      "h2": "text-2xl sm:text-3xl font-semibold tracking-tight text-slate-800",
+      "h3": "text-xl font-medium text-slate-800",
+      "body": "text-sm text-slate-600",
+      "tabular": "text-sm font-mono tracking-tight text-slate-900"
+    }
+  },
+  "colors": {
+    "archetype": "Swiss & High-Contrast with Tropical Warmth",
+    "background": "bg-slate-50 (#F8FAFC)",
+    "surface": "bg-white (#FFFFFF)",
+    "primary_brand": "bg-orange-600 (#EA580C) - use for primary CTAs and active states",
+    "text_main": "text-slate-900 (#0F172A)",
+    "text_muted": "text-slate-500 (#64748B)",
+    "borders": "border-slate-200 (#E2E8F0)",
+    "sidebar_bg": "bg-slate-900 (#0F172A)",
+    "status": {
+      "margin_profit": "text-emerald-700 bg-emerald-50",
+      "owed_payable": "text-red-700 bg-red-50",
+      "pending_transit": "text-amber-700 bg-amber-50"
+    }
+  },
+  "visual_enhancers": {
+    "surfaces": "Use flat solid surfaces for data cards. 1px solid border (border-slate-200), NO heavy shadows to maintain a crisp SaaS look.",
+    "hover_states": "Subtle background shifts (hover:bg-slate-50) for table rows, slight lift (-translate-y-0.5) for summary cards.",
+    "glassmorphism": "Use ONLY for sticky headers (backdrop-blur-md bg-white/80 border-b border-slate-200). Do not use transparent backgrounds."
+  },
+  "component_name": {
+    "tables": "Shadcn Table - customize for dense data (py-2 padding). Right align currency columns.",
+    "badges": "Shadcn Badge - use soft variants for statuses.",
+    "charts": "Recharts or Shadcn Chart for margin/savings trends. Use solid minimal lines, no heavy gradients.",
+    "sidebar": "Fixed left navigation with dark theme to contrast the main data area.",
+    "forms": "Shadcn Input/Select. Use stacked labels, left-aligned."
+  },
+  "grids": {
+    "dashboard": "grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 or gap-6 for KPI strips.",
+    "content": "grid-cols-1 lg:grid-cols-3 gap-6 where main content spans 2 cols, secondary panel 1 col."
+  },
+  "layouts": {
+    "overall": "High Density Grid (Mode B). Left Sidebar + Top Header + Scrollable Content.",
+    "kpi_strip": "Top row above tables showing 3-4 key metrics (Total Margin, Owed, etc.).",
+    "ledger_table": "Task-first, progressive-disclosure. Show Date, Description, Amount (right-aligned), Status, and Action. Hide less critical data behind a 'View Details' modal."
+  },
+  "motion": {
+    "interactions": "Micro-animations on hover (bg color shift, border color darken).",
+    "transitions": "Use specific transitions: transition-colors duration-200 ease-in-out.",
+    "page_load": "Staggered fade-up for dashboard widgets."
+  },
+  "accessibility": {
+    "contrast": "Ensure all text meets APCA/WCAG standards. Text over primary orange must be white. Avoid light gray text on white.",
+    "focus": "focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 on all interactive elements.",
+    "testing": "All buttons, links, form inputs, and key data points MUST include data-testid (e.g., data-testid='login-submit-button')."
+  },
+  "media": {
+    "avatars": "Use rounded-full for user/driver avatars.",
+    "icons": "Use lucide-react (default) or @phosphor-icons/react for dense dashboards."
+  },
+  "3d_libraries": {
+    "usage": "Not recommended for this data-heavy admin dashboard. Focus on clean 2D charts (Recharts) for margins and savings."
+  },
+  "image_urls": [
+    {
+      "category": "Login Screen Background",
+      "url": "https://images.pexels.com/photos/28688386/pexels-photo-28688386.jpeg",
+      "description": "Goa street scene at sunset. Apply a heavy overlay (e.g., bg-slate-900/80) to ensure login form remains the focal point."
+    },
+    {
+      "category": "Car Inventory Placeholder",
+      "url": "https://images.pexels.com/photos/27629970/pexels-photo-27629970.jpeg",
+      "description": "Modern white SUV. Use for car profiles in the owner ledger or booking engine."
+    },
+    {
+      "category": "Driver / Agent Avatar Placeholder",
+      "url": "https://images.pexels.com/photos/5835591/pexels-photo-5835591.jpeg",
+      "description": "Professional driver portrait. Use for the Agent/Driver Ledger."
+    }
+  ],
+  "instructions_to_main_agent": [
+    "Install required fonts (@fontsource/manrope, @fontsource/ibm-plex-sans) and import them.",
+    "Implement role-based views strictly: Super Admin sees Margin/Cost Rate/Customer Rate. Operator sees ONLY Customer Rate (hide Margin completely).",
+    "Build the dashboard using a fixed dark sidebar (bg-slate-900) and a light content area (bg-slate-50).",
+    "Use Recharts for the Super Admin Total Margin Chart (Day/Week/Month).",
+    "For the Airport Transfer Tracker, implement a horizontal step-tracker or a Kanban board view (Scheduled -> En Route -> Completed).",
+    "For ledgers, use highly dense tables (py-2, text-sm). Align all INR (₹) amounts to the right.",
+    "Ensure all numbers are formatted as Indian Rupees (e.g., ₹ 1,500).",
+    "Add proper data-testid attributes to ALL interactive elements and key data cells for automated testing.",
+    "Create a clean login screen with the provided background image, an overlay, and a centered Shadcn card."
+  ],
+  "GENERAL UI UX DESIGN GUIDELINES": [
+    "Keep layouts asymmetrical where appropriate to create visual tension, except in dense data tables where strict alignment is necessary.",
+    "Value negative space: do not cram elements. Use Tailwind spacing scale generously (p-6, p-8) for containers.",
+    "Content is king: The data is the most important part of this dashboard. Do not let UI chrome distract from ledgers and metrics.",
+    "Contrast: Use sharp 1px borders and distinct color blocks to separate sections instead of muddy drop shadows.",
+    "All interactive and key informational elements MUST include a data-testid attribute to facilitate robust automated testing."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Make creative, distinctive frontends that surprise and delight.",
+    "Do not use dark colors as gradients.",
+    "Do not make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur) ONLY for floating elements like sticky headers or modals.",
+    "You MUST NOT apply universal transition (e.g., transition: all). Always add transitions for specific interactive elements.",
+    "You MUST NOT center align the app container, i.e., do not add .App { text-align: center; }.",
+    "Always use modern button styles (sharp or pill-shaped) with interaction animations & color relevant to the app style.",
+    "NEVER use AI assistant Emoji characters like robot/brain etc for icons. Use Phosphor or Lucide icons.",
+    "Every interaction needs micro-animations - hover states, transitions, and entrance animations.",
+    "Use generous spacing (Tailwind p-4 to p-8) around major structural elements, but keep tables compact (p-2).",
+    "Use sonner for toast notifications.",
+    "Use Shadcn components for complex interactions (dropdowns, calendars, dialogs).",
+    "Always use the provided image URLs. NEVER use placeholder URLs (via.placeholder.com, placehold.it, etc.)."
+  ]
+}

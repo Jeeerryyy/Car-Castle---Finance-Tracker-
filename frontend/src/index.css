@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+
+:root {
+  --gunmetal: 189 30% 18%;   /* #20373B */
+  --moonstone: 190 36% 49%;  /* #519CAB */
+  --saffron: 41 100% 65%;    /* #FFC64F */
+  --lightblue: 193 64% 85%;  /* #C3E7F1 */
+
+  --brand: 190 36% 49%;
+  --brand-hover: 190 40% 42%;
+  --slate-ink: 189 30% 15%;
+  --slate-canvas: 195 40% 98%;
+  --slate-line: 193 30% 90%;
+}
+
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  color: hsl(var(--slate-ink));
+  background: #F4FAFC;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "cv02", "cv03", "cv11";
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Manrope', system-ui, sans-serif;
+  letter-spacing: -0.015em;
+}
+
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* shadcn tokens */
+@layer base {
+  :root {
+    --background: 195 40% 99%;
+    --foreground: 189 30% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 189 30% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 189 30% 15%;
+    --primary: 190 36% 49%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 193 64% 92%;
+    --secondary-foreground: 189 30% 18%;
+    --muted: 193 40% 95%;
+    --muted-foreground: 189 20% 45%;
+    --accent: 193 64% 85%;
+    --accent-foreground: 189 30% 18%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 193 30% 88%;
+    --input: 193 30% 88%;
+    --ring: 190 36% 49%;
+    --chart-1: 190 36% 49%;  /* Moonstone */
+    --chart-2: 41 100% 65%;   /* Saffron */
+    --chart-3: 189 30% 18%;   /* Gunmetal */
+    --chart-4: 193 64% 85%;   /* Light Blue */
+    --chart-5: 190 50% 35%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
+}
+
+/* Micro animations */
+.animate-fade-up {
+  animation: fadeUp 350ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 60ms; }
+.stagger > *:nth-child(3) { animation-delay: 120ms; }
+.stagger > *:nth-child(4) { animation-delay: 180ms; }
+.stagger > *:nth-child(5) { animation-delay: 240ms; }
+
+/* Focus rings */
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: none;
+}
+
+.sidebar-link {
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.dense-row {
+  transition: background-color 150ms ease;
+}
+.dense-row:hover { background-color: hsl(210 40% 98%); }
+
+/* Custom text selection */
+::selection {
+  background-color: hsl(24 95% 47% / 0.25);
+  color: hsl(222 47% 11%);
+}
